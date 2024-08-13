@@ -9,7 +9,6 @@ const { Text } = Typography;
 
 interface JoinSessionFormData {
     url: string;
-    password: string;
     phone?: number;
     roomId: string;
 }
@@ -31,8 +30,8 @@ const JoinSession: React.FC<{ role: string; prefilledUrl?: string }> = ({ role, 
     const join: SubmitHandler<JoinSessionFormData> = async (data) => {
         setLoading(true);
         try {
-            const { password, phone, roomId } = data;
-            const response = await joinCall(password, phone!);
+            const { phone, roomId } = data;
+            const response = await joinCall(phone!);
 
             if (response?.result === "success" && response.access) {
                 if (role === 'teacher') {
@@ -67,11 +66,6 @@ const JoinSession: React.FC<{ role: string; prefilledUrl?: string }> = ({ role, 
                     name="phone"
                     control={control}
                     render={({ field }) => <Input placeholder="شماره تلفن" type="number" {...field} />}
-                />
-                <Controller
-                    name="password"
-                    control={control}
-                    render={({ field }) => <Input.Password placeholder="رمز عبور" {...field} className="mt-1" />}
                 />
                 {error && <Text className="text-red-400">{error}</Text>}
                 <Button type="primary" className="mt-3" htmlType="submit" loading={loading}>

@@ -4,12 +4,9 @@ import { IApiResponse } from "../types";
 const API_URL = "https://bitfa.io/api";
 const API_URL2 = "http://localhost:5000";
 
-export const joinCall = async (
-  password: string,
-  mobile: number
-): Promise<IApiResponse> => {
+export const joinCall = async (mobile: number): Promise<IApiResponse> => {
   const response = await axios.get<IApiResponse>(`${API_URL}/ask-join`, {
-    params: { token: password, mobile },
+    params: { mobile },
   });
   return response.data;
 };
