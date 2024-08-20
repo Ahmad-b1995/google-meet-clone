@@ -16,7 +16,7 @@ const Student = () => {
     const [commentsEnabled, setCommentsEnabled] = useState<boolean>(true);
 
     useEffect(() => {
-        if (socketRef.current == null) socketRef.current = io("http://localhost:5000");
+        if (socketRef.current == null) socketRef.current = io("https://api.bitfa.com");
         init();
     }, []);
 
